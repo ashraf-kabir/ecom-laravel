@@ -24,3 +24,5 @@ Route::get('/cart', 'App\Http\Controllers\ClientController@cart');
 Route::get('/checkout', 'App\Http\Controllers\ClientController@checkout');
 Route::get('/login', 'App\Http\Controllers\ClientController@login');
 Route::get('/signup', 'App\Http\Controllers\ClientController@signup');
+
+Route::get('/admin/dashboard', 'App\Http\Controllers\AdminController@dashboard');
