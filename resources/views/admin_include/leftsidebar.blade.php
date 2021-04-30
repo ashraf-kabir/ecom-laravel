@@ -15,8 +15,8 @@
       <div class="collapse" id="form-elements">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/add_category')}}">Add Category</a></li>
-          <li class="nav-item"><a class="nav-link" href="">Add Product</a></li>
-          <li class="nav-item"><a class="nav-link" href="">Add Slider</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/add_product')}}">Add Product</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/add_slider')}}">Add Slider</a></li>
         </ul>
       </div>
     </li>

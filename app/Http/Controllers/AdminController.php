@@ -15,4 +15,14 @@ class AdminController extends Controller
   {
     return view('admin.addcategory');
   }
+
+  public function add_product()
+  {
+    return view('admin.addproduct');
+  }
+
+  public function add_slider()
+  {
+    return view('admin.addslider');
+  }
 }

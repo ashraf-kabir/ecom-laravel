@@ -27,3 +27,5 @@ Route::get('/signup', 'App\Http\Controllers\ClientController@signup');
 
 Route::get('/admin/dashboard', 'App\Http\Controllers\AdminController@dashboard');
 Route::get('/admin/add_category', 'App\Http\Controllers\AdminController@add_category');
+Route::get('/admin/add_product', 'App\Http\Controllers\AdminController@add_product');
+Route::get('/admin/add_slider', 'App\Http\Controllers\AdminController@add_slider');
