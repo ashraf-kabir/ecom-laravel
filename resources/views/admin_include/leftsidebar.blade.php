@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="{{URL::to('/admin/dashboard')}}">
         <i class="ti-home menu-icon"></i>
         <span class="menu-title">Dashboard</span>
       </a>
@@ -14,9 +14,9 @@
       </a>
       <div class="collapse" id="form-elements">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/add_category')}}">Add Category</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/add_product')}}">Add Product</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/add_slider')}}">Add Slider</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/category/add')}}">Add Category</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/product/add')}}">Add Product</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{URL::to('/admin/slider/add')}}">Add Slider</a></li>
         </ul>
       </div>
     </li>
@@ -28,10 +28,10 @@
       </a>
       <div class="collapse" id="tables">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="">Categories</a></li>
-          <li class="nav-item"> <a class="nav-link" href="">Products</a></li>
-          <li class="nav-item"> <a class="nav-link" href="">Sliders</a></li>
-          <li class="nav-item"> <a class="nav-link" href="">Orders</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{URL::to('/admin/categories')}}">Categories</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{URL::to('/admin/products')}}">Products</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{URL::to('/admin/sliders')}}">Sliders</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{URL::to('/admin/orders')}}">Orders</a></li>
         </ul>
       </div>
     </li>

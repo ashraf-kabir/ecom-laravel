@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,19 +19,22 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// Route::get('/', function ()
-// {
-//   return view('welcome');
-// });
+Route::get('/', [ClientController::class, 'home']);
+Route::get('/shop', [ClientController::class, 'shop']);
+Route::get('/cart', [ClientController::class, 'cart']);
+Route::get('/checkout', [ClientController::class, 'checkout']);
+Route::get('/login', [ClientController::class, 'login']);
+Route::get('/signup', [ClientController::class, 'signup']);
 
-Route::get('/', 'App\Http\Controllers\ClientController@home');
-Route::get('/shop', 'App\Http\Controllers\ClientController@shop');
-Route::get('/cart', 'App\Http\Controllers\ClientController@cart');
-Route::get('/checkout', 'App\Http\Controllers\ClientController@checkout');
-Route::get('/login', 'App\Http\Controllers\ClientController@login');
-Route::get('/signup', 'App\Http\Controllers\ClientController@signup');
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 
-Route::get('/admin/dashboard', 'App\Http\Controllers\AdminController@dashboard');
-Route::get('/admin/add_category', 'App\Http\Controllers\AdminController@add_category');
-Route::get('/admin/add_product', 'App\Http\Controllers\AdminController@add_product');
-Route::get('/admin/add_slider', 'App\Http\Controllers\AdminController@add_slider');
+Route::get('/admin/categories', [CategoryController::class, 'index']);
+Route::get('/admin/category/add', [CategoryController::class, 'create']);
+
+Route::get('/admin/products', [ProductController::class, 'index']);
+Route::get('/admin/product/add', [ProductController::class, 'create']);
+
+Route::get('/admin/sliders', [SliderController::class, 'index']);
+Route::get('/admin/slider/add', [SliderController::class, 'create']);
+
+Route::get('/admin/orders', [OrderController::class, 'index']);

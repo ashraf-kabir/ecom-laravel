@@ -1,10 +1,8 @@
 @extends('admin_layouts.app')
 
-
 @section('title')
     Add Slider
 @endsection
-
 
 @section('admin_content')
   <div class="row grid-margin">
@@ -12,16 +10,16 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Create Slider</h4>
-          {!!Form::open(['action' => 'App\Http\Controllers\AdminController@add_slider', 'class' => 'cmxform', 'method' => 'POST', 'id' => 'commentForm'])!!}
+          {!!Form::open(['action' => 'App\Http\Controllers\SliderController@create', 'class' => 'cmxform', 'method' => 'POST', 'id' => 'commentForm'])!!}
             {{csrf_field()}}
               <div class="form-group">
                 {{Form::label('', 'Description One', ['for' => 'cname'])}}
-                {{Form::text('description_one', '', ['class' => 'form-control'])}}
+                {{Form::text('description_one', '', ['class' => 'form-control', 'minlength' => '5'])}}
               </div>
 
               <div class="form-group">
                 {{Form::label('', 'Description Two', ['for' => 'cname'])}}
-                {{Form::text('description_two', '', ['class' => 'form-control'])}}
+                {{Form::text('description_two', '', ['class' => 'form-control', 'minlength' => '5'])}}
               </div>
 
               <div class="form-group">
@@ -40,4 +38,8 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('admin/js/bt-maxLength.js') }}"></script>
 @endsection

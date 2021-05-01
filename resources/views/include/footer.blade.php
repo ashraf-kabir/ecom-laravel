@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="col-md-4">
-         <div class="ftco-footer-widget mb-4">
+        <div class="ftco-footer-widget mb-4">
           <h2 class="ftco-heading-2">Help</h2>
           <div class="d-flex">
             <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">

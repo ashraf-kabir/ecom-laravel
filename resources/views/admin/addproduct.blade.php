@@ -10,11 +10,11 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Create Product</h4>
-          {!!Form::open(['action' => 'App\Http\Controllers\AdminController@add_product', 'class' => 'cmxform', 'method' => 'POST', 'id' => 'commentForm'])!!}
+          {!!Form::open(['action' => 'App\Http\Controllers\ProductController@create', 'class' => 'cmxform', 'method' => 'POST', 'id' => 'commentForm'])!!}
             {{csrf_field()}}
               <div class="form-group">
                 {{Form::label('', 'Product Name', ['for' => 'cname'])}}
-                {{Form::text('product_name', '', ['class' => 'form-control'])}}
+                {{Form::text('product_name', '', ['class' => 'form-control', 'minlength' => '2'])}}
               </div>
 
               <div class="form-group">
@@ -43,4 +43,8 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('scripts')
+<script src="js/bt-maxLength.js"></script>
 @endsection
