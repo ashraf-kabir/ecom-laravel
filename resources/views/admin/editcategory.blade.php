@@ -9,9 +9,9 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Create Category</h4>
+          <h4 class="card-title">Edit Category</h4>
 
-          @if (Session::has('status_1'))
+          {{-- @if (Session::has('status_1'))
             <div class="alert alert-success">
               {{Session::get('status_1')}}
             </div>
@@ -21,15 +21,16 @@
             <div class="alert alert-danger">
               {{Session::get('status_2')}}
             </div>
-          @endif
+          @endif --}}
 
-          {!!Form::open(['action' => 'App\Http\Controllers\CategoryController@store', 'class' => 'cmxform', 'method' => 'POST', 'id' => 'add_category_form'])!!}
+          {!!Form::open(['action' => 'App\Http\Controllers\CategoryController@update', 'class' => 'cmxform', 'method' => 'PUT', 'id' => 'edit_category_form'])!!}
             {{csrf_field()}}
               <div class="form-group">
+                {{Form::hidden('id', $category->id)}}
                 {{Form::label('', 'Product Category', ['for' => 'category_name'])}}
-                {{Form::text('category_name', '', ['class' => 'form-control', 'minlength' => '2', 'id' => 'category_name'])}}
+                {{Form::text('category_name', $category->category_name, ['class' => 'form-control', 'minlength' => '2', 'id' => 'category_name'])}}
               </div>
-              {{Form::submit('Save', ['class' => 'btn btn-primary'])}}
+              {{Form::submit('Update', ['class' => 'btn btn-primary'])}}
           {!!Form::close()!!}
         </div>
       </div>
