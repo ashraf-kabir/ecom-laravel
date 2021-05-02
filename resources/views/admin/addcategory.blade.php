@@ -23,10 +23,20 @@
             </div>
           @endif
 
-          {!!Form::open(['action' => 'App\Http\Controllers\CategoryController@store', 'class' => 'cmxform', 'method' => 'POST', 'id' => 'add_category_form'])!!}
+          @if ($errors->any())
+            <div class="alert alert-danger">
+              <ul>
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+
+          {!!Form::open(['action' => 'App\Http\Controllers\CategoryController@store', 'class' => 'add_category_form', 'method' => 'POST', 'id' => 'add_category_form'])!!}
             {{csrf_field()}}
               <div class="form-group">
-                {{Form::label('', 'Product Category', ['for' => 'category_name'])}}
+                {{Form::label('', 'Category Name', ['for' => 'category_name'])}}
                 {{Form::text('category_name', '', ['class' => 'form-control', 'minlength' => '2', 'id' => 'category_name'])}}
               </div>
               {{Form::submit('Save', ['class' => 'btn btn-primary'])}}

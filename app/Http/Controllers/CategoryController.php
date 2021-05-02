@@ -36,20 +36,13 @@ class CategoryController extends Controller
    */
   public function store(Request $request)
   {
-    $check_category_name = Category::where('category_name', $request->input('category_name'))->first();
-
+    $request->validate([
+      'category_name' => 'required|unique:categories|max:255',
+    ]);
     $category = new Category();
-
-    if (!$check_category_name)
-    {
-      $category->category_name = $request->input('category_name');
-      $category->save();
-      return redirect('admin/categories')->with('status_1', 'The "' . $category->category_name . '" added successfully.');
-    }
-    else
-    {
-      return back()->with('status_2', 'Category already exists. Try again.');
-    }
+    $category->category_name = $request->input('category_name');
+    $category->save();
+    return redirect('admin/categories')->with('status_1', 'The "' . $category->category_name . '" category added successfully.');
   }
 
   /**
@@ -82,9 +75,12 @@ class CategoryController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, $id = 0)
+  public function update(Request $request, $id)
   {
-    $category = Category::find($request->input('id'));
+    $request->validate([
+      'category_name' => 'required|unique:categories|max:255',
+    ]);
+    $category                = Category::find($id);
     $category->category_name = $request->input('category_name');
     $category->update();
     return redirect('admin/categories')->with('status_1', 'The "' . $category->category_name . '" category updated successfully.');

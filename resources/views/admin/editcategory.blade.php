@@ -23,15 +23,25 @@
             </div>
           @endif --}}
 
-          {!!Form::open(['action' => 'App\Http\Controllers\CategoryController@update', 'class' => 'cmxform', 'method' => 'PUT', 'id' => 'edit_category_form'])!!}
+          @if ($errors->any())
+            <div class="alert alert-danger">
+              <ul>
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+
+          {!!Form::open(['action' => ['App\Http\Controllers\CategoryController@update', $category->id], 'class' => 'edit_category_form', 'method' => 'PUT', 'id' => 'edit_category_form'])!!}
             {{csrf_field()}}
               <div class="form-group">
-                {{Form::hidden('id', $category->id)}}
-                {{Form::label('', 'Product Category', ['for' => 'category_name'])}}
+                {{Form::label('', 'Category Name', ['for' => 'category_name'])}}
                 {{Form::text('category_name', $category->category_name, ['class' => 'form-control', 'minlength' => '2', 'id' => 'category_name'])}}
               </div>
               {{Form::submit('Update', ['class' => 'btn btn-primary'])}}
           {!!Form::close()!!}
+
         </div>
       </div>
     </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +15,8 @@ class ProductController extends Controller
    */
   public function index()
   {
-    return view('admin.products');
+    $products = Product::with('category')->get();
+    return view('admin.products')->with('products', $products);
   }
 
   /**
@@ -23,7 +26,8 @@ class ProductController extends Controller
    */
   public function create()
   {
-    return view('admin.addproduct');
+    $categories = Category::All()->pluck('category_name', 'id');
+    return view('admin.addproduct')->with('categories', $categories);
   }
 
   /**
@@ -34,7 +38,37 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $request->validate([
+      'product_name'        => 'required|unique:products|max:255',
+      'product_price'       => 'required|numeric',
+      'product_image'       => 'nullable|mimes:jpg,png,jpeg|max:1024',
+      'product_category_id' => 'required|numeric',
+    ]);
+
+    if ($request->hasFile('product_image'))
+    {
+      $file_name_with_ext  = $request->file('product_image')->getClientOriginalName();
+      $file_name           = pathinfo($file_name_with_ext, PATHINFO_FILENAME);
+      $extension           = $request->file('product_image')->getClientOriginalExtension();
+      $file_name_formatted = $file_name . '_' . time() . '.' . $extension;
+      $image_path          = $request->file('product_image')->storeAs('public/uploads/product_images', $file_name_formatted);
+    }
+    else
+    {
+      $image_path = 'no_image.jpg';
+    }
+
+    $product = new Product();
+
+    $product->product_name        = $request->input('product_name');
+    $product->product_price       = $request->input('product_price');
+    $product->product_category_id = $request->input('product_category_id');
+    $product->product_image       = $image_path;
+    $product->product_status      = 1;
+
+    $product->save();
+
+    return redirect('admin/products')->with('status_1', 'The "' . $product->product_name . '" product added successfully.');
   }
 
   /**

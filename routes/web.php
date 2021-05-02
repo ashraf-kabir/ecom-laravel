@@ -32,11 +32,12 @@ Route::get('/admin/categories', [CategoryController::class, 'index']);
 Route::get('/admin/category/add', [CategoryController::class, 'create']);
 Route::post('/admin/category/store', [CategoryController::class, 'store']);
 Route::get('/admin/category/edit/{id}', [CategoryController::class, 'edit']);
-Route::put('/admin/category/update', [CategoryController::class, 'update']);
+Route::put('/admin/category/update/{id}', [CategoryController::class, 'update']);
 Route::get('/admin/category/delete/{id}', [CategoryController::class, 'destroy']);
 
 Route::get('/admin/products', [ProductController::class, 'index']);
 Route::get('/admin/product/add', [ProductController::class, 'create']);
+Route::post('/admin/product/store', [ProductController::class, 'store']);
 
 Route::get('/admin/sliders', [SliderController::class, 'index']);
 Route::get('/admin/slider/add', [SliderController::class, 'create']);
