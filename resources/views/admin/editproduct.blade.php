@@ -1,7 +1,7 @@
 @extends('admin_layouts.app')
 
 @section('title')
-    Add Product
+    Edit Product
 @endsection
 
 @section('admin_content')
@@ -9,7 +9,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Create Product</h4>
+          <h4 class="card-title">Edit Product</h4>
 
           @if ($errors->any())
             <div class="alert alert-danger">
@@ -21,21 +21,21 @@
             </div>
           @endif
 
-          {!!Form::open(['action' => 'App\Http\Controllers\ProductController@store', 'class' => 'add_product_form', 'method' => 'POST', 'enctype' => 'multipart', 'files' => true])!!}
+          {!!Form::open(['action' => ['App\Http\Controllers\ProductController@update', $product->id], 'class' => 'edit_product_form', 'method' => 'PUT', 'enctype' => 'multipart', 'files' => true])!!}
             {{csrf_field()}}
               <div class="form-group">
                 {{Form::label('', 'Product Name', ['for' => 'product_name'])}}
-                {{Form::text('product_name', '', ['class' => 'form-control', 'minlength' => '2', 'id' => 'product_name'])}}
+                {{Form::text('product_name', $product->product_name, ['class' => 'form-control', 'minlength' => '2', 'id' => 'product_name'])}}
               </div>
 
               <div class="form-group">
                 {{Form::label('', 'Product Price', ['for' => 'product_price'])}}
-                {{Form::text('product_price', '', ['class' => 'form-control', 'id' => 'product_price'])}}
+                {{Form::text('product_price', $product->product_price, ['class' => 'form-control', 'id' => 'product_price'])}}
               </div>
 
               <div class="form-group">
                 {{Form::label('', 'Product Category', ['for' => 'product_category'])}}
-                {{Form::select('category_id', $categories, null, ['placeholder' => 'Select Category', 'class' => 'form-control', 'id' => 'product_category'])}}
+                {{Form::select('category_id', $categories, $product->category->id, ['class' => 'form-control', 'id' => 'product_category'])}}
               </div>
 
               <div class="form-group">
@@ -48,7 +48,7 @@
                 {{Form::checkbox('product_status', '', 'true', ['class' => 'form-control', 'id' => 'product_status'])}}
               </div> --}}
 
-              {{Form::submit('Save', ['class' => 'btn btn-primary'])}}
+              {{Form::submit('Update', ['class' => 'btn btn-primary'])}}
           {!!Form::close()!!}
 
         </div>

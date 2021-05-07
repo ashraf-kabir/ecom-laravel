@@ -46,7 +46,7 @@
                     @endif
                   </td>
                   <td>
-                    <button class="btn btn-outline-primary">Edit</button>
+                    <button class="btn btn-outline-primary" onclick="window.location = '{{url('admin/product/edit/'.$product->id)}}'">Edit</button>
                     <a class="btn btn-outline-danger" href="" id="delete">Delete</a>
                     @if ($product->product_status == 1)
                       <button class="btn btn-outline-warning">Deactivate</button>                    

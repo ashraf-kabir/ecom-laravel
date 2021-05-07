@@ -38,6 +38,9 @@ Route::get('/admin/category/delete/{id}', [CategoryController::class, 'destroy']
 Route::get('/admin/products', [ProductController::class, 'index']);
 Route::get('/admin/product/add', [ProductController::class, 'create']);
 Route::post('/admin/product/store', [ProductController::class, 'store']);
+Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit']);
+Route::put('/admin/product/update/{id}', [ProductController::class, 'update']);
+Route::get('/admin/product/delete/{id}', [ProductController::class, 'destroy']);
 
 Route::get('/admin/sliders', [SliderController::class, 'index']);
 Route::get('/admin/slider/add', [SliderController::class, 'create']);
