@@ -108,7 +108,6 @@ class ProductController extends Controller
    */
   public function update(Request $request, $id)
   {
-    // dd($request);
     $request->validate([
       'product_name'  => 'required|max:255',
       'product_price' => 'required|numeric',
@@ -130,19 +129,12 @@ class ProductController extends Controller
       $file_name_formatted = $file_name . '_' . time() . '.' . $extension;
       $image_path          = $request->file('product_image')->storeAs('public/uploads/product_images', $file_name_formatted);
 
-      $old_image = Product::find($id);
-
-      if ($old_image->product_image != 'no_image.jpg')
+      if ($product->product_image != 'no_image.jpg')
       {
-        Storage::delete('public/' . $old_image->product_image);
+        Storage::delete('public/' . $product->product_image);
       }
       $product->product_image = 'uploads/product_images/' . $file_name_formatted;
-
     }
-    // else
-    // {
-    //   $image_path = 'no_image.jpg';
-    // }
 
     $product->update();
     return redirect('admin/products')->with('status_1', 'The "' . $product->product_name . '" product updated successfully.');
@@ -156,6 +148,29 @@ class ProductController extends Controller
    */
   public function destroy($id)
   {
-    //
+    $product = Product::find($id);
+    if ($product->product_image != 'no_image.jpg')
+    {
+      Storage::delete('public/' . $product->product_image);
+    }
+    $product->delete();
+    return redirect('admin/products')->with('status_1', 'The "' . $product->product_name . '" product deleted successfully.');
+  }
+
+
+  public function activate($id)
+  {
+    $product = Product::find($id);
+    $product->status = 1;
+    $product->update();
+    return redirect('admin/products')->with('status_1', 'The "' . $product->product_name . '" product activated successfully.');
+  }
+
+  public function deactivate($id)
+  {
+    $product = Product::find($id);
+    $product->status = 0;
+    $product->update();
+    return redirect('admin/products')->with('status_1', 'The "' . $product->product_name . '" product deactivated successfully.');
   }
 }

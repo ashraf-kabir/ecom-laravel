@@ -41,6 +41,8 @@ Route::post('/admin/product/store', [ProductController::class, 'store']);
 Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit']);
 Route::put('/admin/product/update/{id}', [ProductController::class, 'update']);
 Route::get('/admin/product/delete/{id}', [ProductController::class, 'destroy']);
+Route::get('/admin/product/activate/{id}', [ProductController::class, 'activate']);
+Route::get('/admin/product/deactivate/{id}', [ProductController::class, 'deactivate']);
 
 Route::get('/admin/sliders', [SliderController::class, 'index']);
 Route::get('/admin/slider/add', [SliderController::class, 'create']);

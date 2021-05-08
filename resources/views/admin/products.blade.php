@@ -39,7 +39,7 @@
                   <td>{{$product->category->category_name}}</td>
                   <td><img src="/storage/{{$product->product_image}}" alt="{{$product->product_name}}" width="50" height="50"></td>
                   <td>
-                    @if ($product->product_status == 1)
+                    @if ($product->status == 1)
                       <label class="badge badge-success">Activated</label>
                     @else
                       <label class="badge badge-danger">Deactivated</label>
@@ -47,11 +47,11 @@
                   </td>
                   <td>
                     <button class="btn btn-outline-primary" onclick="window.location = '{{url('admin/product/edit/'.$product->id)}}'">Edit</button>
-                    <a class="btn btn-outline-danger" href="" id="delete">Delete</a>
-                    @if ($product->product_status == 1)
-                      <button class="btn btn-outline-warning">Deactivate</button>                    
+                    <a class="btn btn-outline-danger" href="/admin/product/delete/{{$product->id}}" id="delete">Delete</a>
+                    @if ($product->status == 1)
+                      <button class="btn btn-outline-warning" onclick="window.location = '{{url('admin/product/deactivate/'.$product->id)}}'">Deactivate</button>                    
                     @else
-                      <button class="btn btn-outline-success">Activate</button>
+                      <button class="btn btn-outline-success" onclick="window.location = '{{url('admin/product/activate/'.$product->id)}}'">Activate</button>
                     @endif
                   </td>
                 </tr>
