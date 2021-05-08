@@ -46,5 +46,11 @@ Route::get('/admin/product/deactivate/{id}', [ProductController::class, 'deactiv
 
 Route::get('/admin/sliders', [SliderController::class, 'index']);
 Route::get('/admin/slider/add', [SliderController::class, 'create']);
+Route::post('/admin/slider/store', [SliderController::class, 'store']);
+Route::get('/admin/slider/edit/{id}', [SliderController::class, 'edit']);
+Route::put('/admin/slider/update/{id}', [SliderController::class, 'update']);
+Route::get('/admin/slider/delete/{id}', [SliderController::class, 'destroy']);
+Route::get('/admin/slider/activate/{id}', [SliderController::class, 'activate']);
+Route::get('/admin/slider/deactivate/{id}', [SliderController::class, 'deactivate']);
 
 Route::get('/admin/orders', [OrderController::class, 'index']);
