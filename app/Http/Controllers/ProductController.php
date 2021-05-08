@@ -66,7 +66,7 @@ class ProductController extends Controller
     $product->product_price  = $request->input('product_price');
     $product->category_id    = $request->input('category_id');
     $product->product_image  = $image_path_real;
-    $product->product_status = 1;
+    $product->status = 1;
 
     $product->save();
 

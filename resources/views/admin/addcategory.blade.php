@@ -39,7 +39,7 @@
                 {{Form::label('', 'Category Name', ['for' => 'category_name'])}}
                 {{Form::text('category_name', '', ['class' => 'form-control', 'minlength' => '2', 'id' => 'category_name'])}}
               </div>
-              {{Form::submit('Save', ['class' => 'btn btn-primary'])}}
+              {{Form::submit('Save', ['class' => 'btn btn-success'])}}
           {!!Form::close()!!}
         </div>
       </div>

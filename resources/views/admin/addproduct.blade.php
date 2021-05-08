@@ -48,7 +48,7 @@
                 {{Form::checkbox('product_status', '', 'true', ['class' => 'form-control', 'id' => 'product_status'])}}
               </div> --}}
 
-              {{Form::submit('Save', ['class' => 'btn btn-primary'])}}
+              {{Form::submit('Save', ['class' => 'btn btn-success'])}}
           {!!Form::close()!!}
 
         </div>

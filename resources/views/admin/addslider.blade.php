@@ -32,7 +32,7 @@
                 {{Form::checkbox('slider_status', '', 'true', ['class' => 'form-control'])}}
               </div>
 
-              {{Form::submit('Save', ['class' => 'btn btn-primary'])}}
+              {{Form::submit('Save', ['class' => 'btn btn-success'])}}
           {!!Form::close()!!}
         </div>
       </div>
