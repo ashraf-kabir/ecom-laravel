@@ -11,7 +11,7 @@
     <li class="nav-item active"><a href="{{URL::to('/')}}" class="nav-link">Home</a></li>
     <li class="nav-item active"><a href="{{URL::to('/shop')}}" class="nav-link">shop</a></li>
         
-        <li class="nav-item cta cta-colored"><a href="{{URL::to('/cart')}}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+        <li class="nav-item cta cta-colored"><a href="{{URL::to('/cart')}}" class="nav-link"><span class="icon-shopping_cart"></span>[{{Session::has('cart') ? Session::get('cart')->total_qty:0}}]</a></li>
 
         <li class="nav-item"><a href="{{URL::to('/login')}}" class="nav-link"><span class="fa fa-user"></span>Login</a></li>
 

@@ -29,11 +29,6 @@ class ClientController extends Controller
     return view('client.shop')->with('products', $products)->with('categories', $categories);
   }
 
-  public function cart()
-  {
-    return view('client.cart');
-  }
-
   public function checkout()
   {
     return view('client.checkout');
