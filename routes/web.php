@@ -20,7 +20,10 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', [ClientController::class, 'home']);
+
 Route::get('/shop', [ClientController::class, 'shop']);
+Route::get('/shop/cat/{id}', [ClientController::class, 'shop_by_category']);
+
 Route::get('/cart', [ClientController::class, 'cart']);
 Route::get('/checkout', [ClientController::class, 'checkout']);
 Route::get('/login', [ClientController::class, 'login']);
