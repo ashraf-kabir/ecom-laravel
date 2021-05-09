@@ -15,6 +15,12 @@
       </div>
     @endif
 
+    @if (Session::has('status_2'))
+      <div class="alert alert-danger">
+        {{Session::get('status_2')}}
+      </div>
+    @endif
+
     <div class="row">
       <div class="col-12">
         <div class="table-responsive">

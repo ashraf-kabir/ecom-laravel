@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -39,7 +41,7 @@ class CategoryController extends Controller
     $request->validate([
       'category_name' => 'required|unique:categories|max:255',
     ]);
-    $category = new Category();
+    $category                = new Category();
     $category->category_name = $request->input('category_name');
     $category->save();
     return redirect('admin/categories')->with('status_1', 'The "' . $category->category_name . '" category added successfully.');
@@ -94,8 +96,16 @@ class CategoryController extends Controller
    */
   public function destroy($id)
   {
+    $check    = DB::table('products')->where('category_id', $id)->first();
     $category = Category::find($id);
-    $category->delete();
-    return redirect('admin/categories')->with('status_1', 'The "' . $category->category_name . '" category deleted successfully.');
+    if ($check)
+    {
+      return Redirect::back()->with('status_2', 'Error! You can\'t delete "' . $category->category_name . '" category. It\'s being used on at least one product.');
+    }
+    else
+    {
+      $category->delete();
+      return Redirect::back()->with('status_1', 'The "' . $category->category_name . '" category deleted successfully.');
+    }
   }
 }
