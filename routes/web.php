@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -30,8 +31,9 @@ Route::get('/add_to_cart/{id}', [CartController::class, 'add_to_cart']);
 Route::post('/update_qty', [CartController::class, 'update_qty']);
 Route::get('/cart/remove_item/{id}', [CartController::class, 'remove_item']);
 
+Route::get('/checkout', [CheckoutController::class, 'checkout']);
+Route::post('/post_checkout', [CheckoutController::class, 'post_checkout']);
 
-Route::get('/checkout', [ClientController::class, 'checkout']);
 Route::get('/login', [ClientController::class, 'login']);
 Route::get('/signup', [ClientController::class, 'signup']);
 

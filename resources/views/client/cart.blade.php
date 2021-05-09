@@ -36,40 +36,40 @@
 
                 <tbody>
                   @if (Session::has('cart'))
-                      @foreach ($products as $product)
-                        <tr class="text-center">
-                          <td class="product-remove"><a href="/cart/remove_item/{{$product['product_id']}}"><span class="ion-ios-close"></span></a></td>
+                    @foreach ($products as $product)
+                      <tr class="text-center">
+                        <td class="product-remove"><a href="/cart/remove_item/{{$product['product_id']}}"><span class="ion-ios-close"></span></a></td>
 
-                          <td class="image-prod"><div class="img" style="background-image:url(/storage/{{$product['product_image']}});"></div></td>
+                        <td class="image-prod"><div class="img" style="background-image:url(/storage/{{$product['product_image']}});"></div></td>
 
-                          <td class="product-name">
-                            <h3>{{$product['product_name']}}</h3>
-                            <p>Far far away, behind the word mountains, far from the countries</p>
-                          </td>
+                        <td class="product-name">
+                          <h3>{{$product['product_name']}}</h3>
+                          <p>Far far away, behind the word mountains, far from the countries</p>
+                        </td>
 
-                          <td class="price">${{$product['product_price']}}</td>
+                        <td class="price">${{$product['product_price']}}</td>
 
-                          <td class="quantity">
-                            {!!Form::open(['action' => 'App\Http\Controllers\CartController@update_qty', 'class' => 'update_qty_form', 'method' => 'POST', 'id' => 'update_qty_form'])!!}
-                              {{csrf_field()}}
-                              <div class="input-group mb-3">
-                                <input type="number" name="quantity" class="quantity form-control input-number" value="{{$product['qty']}}" min="1" max="20" autocomplete="off">
-                                <input type="hidden" name="id" class="id" value="{{$product['product_id']}}">
-                              </div>
-                              {{Form::submit('Update', ['class' => 'btn btn-success'])}}
-                            {!!Form::close()!!}
-                          </td>
-                          
-                          <td class="total">${{$product['product_price'] * $product['qty']}}</td>
-                        </tr>
-                      @endforeach
+                        <td class="quantity">
+                          {!!Form::open(['action' => 'App\Http\Controllers\CartController@update_qty', 'class' => 'update_qty_form', 'method' => 'POST', 'id' => 'update_qty_form'])!!}
+                            {{csrf_field()}}
+                            <div class="input-group mb-3">
+                              <input type="number" name="quantity" class="quantity form-control input-number" value="{{$product['qty']}}" min="1" max="20" autocomplete="off">
+                              <input type="hidden" name="id" class="id" value="{{$product['product_id']}}">
+                            </div>
+                            {{Form::submit('Update', ['class' => 'btn btn-success'])}}
+                          {!!Form::close()!!}
+                        </td>
+                        
+                        <td class="total">${{$product['product_price'] * $product['qty']}}</td>
+                      </tr>
+                    @endforeach
                   @else
-                    
+                    @if (Session::has('success'))
+                      <div class="alert alert-success">
+                        {{Session::get('success')}}
+                      </div>
+                    @endif
                   @endif
-                  
-
-                  <!-- END TR-->
-
 
                 </tbody>
               </table>
@@ -89,7 +89,7 @@
                 </div>
               </form>
             </div>
-            <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
+            <p><a href="/checkout" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
           </div>
           <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
             <div class="cart-total mb-3">
@@ -110,7 +110,7 @@
                 </div>
               </form>
             </div>
-            <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a></p>
+            <p><a href="/checkout" class="btn btn-primary py-3 px-4">Estimate</a></p>
           </div>
           <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
             <div class="cart-total mb-3">
@@ -133,7 +133,7 @@
                 <span>$17.60</span>
               </p>
             </div>
-            <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+            <p><a href="/checkout" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
           </div>
         </div>
 			</div>
