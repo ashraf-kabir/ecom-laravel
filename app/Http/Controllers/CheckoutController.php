@@ -48,7 +48,9 @@ class CheckoutController extends Controller
       'cvc'        => 'required|numeric|digits:3',
     ]);
 
-    Stripe::setApiKey('sk_test_51HwnxzBhwbMEU8sQTg3a9csW5Gl56qm2Ziq5bA23JPwUTXDZZLwqw3J3ucF6tdabhoIQBavqkNEvYFuYiRWwVDo500DbvtaipZ');
+    $stripe_secret_key = env('STRIPE_SECRET_KEY');
+
+    Stripe::setApiKey($stripe_secret_key);
 
     try {
       $charge = Charge::create(array(
