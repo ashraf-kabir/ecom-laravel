@@ -117,7 +117,7 @@
               <h3>Cart Totals</h3>
               <p class="d-flex">
                 <span>Subtotal</span>
-                <span>$20.60</span>
+                <span>${{Session::get('cart')->total_price}}</span>
               </p>
               <p class="d-flex">
                 <span>Delivery</span>
@@ -125,12 +125,12 @@
               </p>
               <p class="d-flex">
                 <span>Discount</span>
-                <span>$3.00</span>
+                <span>$0.00</span>
               </p>
               <hr>
               <p class="d-flex total-price">
                 <span>Total</span>
-                <span>$17.60</span>
+                <span>${{Session::get('cart')->total_price}}</span>
               </p>
             </div>
             <p><a href="/checkout" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>

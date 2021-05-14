@@ -23,7 +23,7 @@
       <div class="row justify-content-center">
         <div class="col-xl-7 ftco-animate">
 
-          {!!Form::open(['action' => 'App\Http\Controllers\CheckoutController@checkout', 'class' => 'checkout_form', 'method' => 'POST', 'id' => 'checkout_form', 'autocomplete' => 'off' ])!!}
+          {!!Form::open(['action' => 'App\Http\Controllers\CheckoutController@post_checkout', 'class' => 'checkout_form', 'method' => 'POST', 'id' => 'checkout_form', 'autocomplete' => 'off' ])!!}
           {{csrf_field()}}
 
             @if (Session::has('error'))
@@ -33,42 +33,71 @@
               </div>
             @endif
 
+            <div id="charge_error" class="alert alert-danger d-none"></div>
+
             <h3 class="mb-4 billing-heading">Billing Details</h3>
             <div class="row align-items-end">
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="first_name">First Name</label>
+                  <label for="first_name">First Name *</label>
                   <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" autocomplete="off">
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="last_name">Last Name</label>
+                  <label for="last_name">Last Name *</label>
                   <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" autocomplete="off">
                 </div>
               </div>
-              <div class="w-100"></div>
 
+              <div class="w-100"></div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="state">State</label>
-                  <input type="text" class="state form-control" id="state" name="state" placeholder="" maxlength="2" minlength="2" autocomplete="off">
+                  <label for="email">Email *</label>
+                  <input type="text" name="email" id="email" class="form-control" placeholder="test@example.com" autocomplete="off">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="phone">Phone *</label>
+                  <input type="text" name="phone" id="phone" class="form-control" placeholder="Phone" autocomplete="off">
                 </div>
               </div>
 
+              <div class="w-100"></div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="country">Country</label>
-                  <input type="text" class="country form-control" id="country" name="country" placeholder="" maxlength="2" minlength="2" autocomplete="off">
+                  <label for="city">City *</label>
+                  <input type="text" name="city" id="city" class="form-control" placeholder="City" autocomplete="off">
                 </div>
               </div>
-              <div class="w-100"></div>
-
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="streetaddress">Street Address</label>
+                  <label for="state">State *</label>
+                  <input type="text" class="state form-control" id="state" name="state" placeholder="State" maxlength="2" minlength="2" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="w-100"></div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="zip">ZIP *</label>
+                  <input type="text" name="zip" id="zip" class="form-control" placeholder="Zip" autocomplete="off">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="country">Country *</label>
+                  <input type="text" class="country form-control" id="country" name="country" placeholder="Country" maxlength="2" minlength="2" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="w-100"></div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="streetaddress">Street Address *</label>
                   <input type="text" class="form-control" id="address_1" name="address_1" placeholder="Address line 1" autocomplete="off">
                 </div>
               </div>
@@ -76,36 +105,6 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <input type="text" class="form-control" id="address_2" name="address_2" placeholder="Address line 2" autocomplete="off">
-                </div>
-              </div>
-
-              <div class="w-100"></div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="city">Town / City *</label>
-                  <input type="text" name="city" id="city" class="form-control" placeholder="" autocomplete="off">
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="zip">Postcode / ZIP *</label>
-                  <input type="text" name="zip" id="zip" class="form-control" placeholder="" autocomplete="off">
-                </div>
-              </div>
-
-              <div class="w-100"></div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="phone">Phone</label>
-                  <input type="text" name="phone" id="phone" class="form-control" placeholder="" autocomplete="off">
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="email">Email Address</label>
-                  <input type="text" name="email" id="email" class="form-control" placeholder="" autocomplete="off">
                 </div>
               </div>
 
@@ -126,34 +125,42 @@
 
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="card_name">Name on Card</label>
-                  <input class="form-control" type="text" name="card_name" id="card_name">
+                  <label for="card_name">Name on Card *</label>
+                  <input class="form-control" type="text" name="card_name" id="card_name" autocomplete="off">
                 </div>
               </div>
 
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="card_no">Card Number</label>
-                  <input class="form-control" type="text" name="card_no" id="card_no">
+                  <label for="card_no">Card Number *</label>
+                  <input class="form-control" type="text" name="card_no" id="card_no" minlength="16" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="expire_at">Expiry Date</label>
-                  <input class="form-control" type="text" name="expire_at" id="expire_at">
+                  <label for="card_month">Expiry Month (mm) *</label>
+                  <input class="form-control" type="number" name="card_month" id="card_month" min="1" max="12" maxlength="2" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="card_year">Expery Year (yy) *</label>
+                  <input class="form-control" type="number" name="card_year" id="card_year" min="21" maxlength="2" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                 </div>
               </div>
 
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
-                  <label for="card_name">CVC</label>
-                  <input class="form-control" type="text" name="card_name" id="card_name">
+                  <label for="cvc">CVC *</label>
+                  <input class="form-control" type="text" name="cvc" id="cvc" maxlength="3" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                 </div>
               </div>
 
             </div>
-            
+            {{Form::submit('Buy Now', ['class' => 'btn btn-success'])}}
+
           {!!Form::close()!!}
 
         </div>
@@ -165,7 +172,7 @@
                 <h3 class="billing-heading mb-4">Cart Total</h3>
                 <p class="d-flex">
                   <span>Subtotal</span>
-                  <span>$20.60</span>
+                  <span>${{Session::get('cart')->total_price}}</span>
                 </p>
                 <p class="d-flex">
                   <span>Delivery</span>
@@ -173,7 +180,7 @@
                 </p>
                 <p class="d-flex">
                   <span>Discount</span>
-                  <span>$3.00</span>
+                  <span>$0.00</span>
                 </p>
                 <hr>
                 <p class="d-flex total-price">
