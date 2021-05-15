@@ -12,19 +12,38 @@
         </div>
       </li>
     </ul>
+
+    @guest
+
+    @else
     <ul class="navbar-nav navbar-nav-right">
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link" href="#" data-toggle="dropdown" id="profileDropdown">
           <img src="{{ asset('admin/images/logo_2H_tech.png') }}" alt="profile"/>
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-          <a class="dropdown-item">
+          
+          <a href="" class="dropdown-item">
             <i class="ti-power-off text-primary"></i>
-            Logout
+            {{ Auth::user()->name }}
           </a>
+
+          <a class="dropdown-item"  href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+            <i class="ti-power-off text-primary"></i>
+            {{ __('Logout') }}
+          </a>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+          </form>
+
         </div>
       </li>
     </ul>
+    @endguest
+
     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
       <span class="ti-layout-grid2"></span>
     </button>

@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
   /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
+  /**
    * Display a listing of the resource.
    *
    * @return \Illuminate\Http\Response
@@ -62,11 +72,11 @@ class ProductController extends Controller
 
     $product = new Product();
 
-    $product->product_name   = $request->input('product_name');
-    $product->product_price  = $request->input('product_price');
-    $product->category_id    = $request->input('category_id');
-    $product->product_image  = $image_path_real;
-    $product->status = 1;
+    $product->product_name  = $request->input('product_name');
+    $product->product_price = $request->input('product_price');
+    $product->category_id   = $request->input('category_id');
+    $product->product_image = $image_path_real;
+    $product->status        = 1;
 
     $product->save();
 
@@ -157,10 +167,9 @@ class ProductController extends Controller
     return redirect('admin/products')->with('status_1', 'The "' . $product->product_name . '" product deleted successfully.');
   }
 
-
   public function activate($id)
   {
-    $product = Product::find($id);
+    $product         = Product::find($id);
     $product->status = 1;
     $product->update();
     return redirect('admin/products')->with('status_1', 'The "' . $product->product_name . '" product activated successfully.');
@@ -168,7 +177,7 @@ class ProductController extends Controller
 
   public function deactivate($id)
   {
-    $product = Product::find($id);
+    $product         = Product::find($id);
     $product->status = 0;
     $product->update();
     return redirect('admin/products')->with('status_1', 'The "' . $product->product_name . '" product deactivated successfully.');

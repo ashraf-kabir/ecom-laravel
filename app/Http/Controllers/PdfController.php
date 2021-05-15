@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Session;
 
 class PdfController extends Controller
 {
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
   public function view_pdf($id)
   {
     Session::put('id', $id);
@@ -67,10 +77,10 @@ class PdfController extends Controller
                       <thead class="thead">
                           <tr class="text-left">
                               <th>Client Name: ' . $customer_name . '<br> Email: ' . $customer_email .
-                                  ' <br> Phone: ' . $customer_phone . '<br> Address: ' . $customer_address .
-                                  ' <br> City: ' . $customer_city . ' <br> State: ' . $customer_state .
-                                  ' <br> Zip: ' . $customer_zip . ' <br> Country: ' . $customer_country .
-                                  ' <br> Date: ' . $created_at . '</th>
+      ' <br> Phone: ' . $customer_phone . '<br> Address: ' . $customer_address .
+      ' <br> City: ' . $customer_city . ' <br> State: ' . $customer_state .
+      ' <br> Zip: ' . $customer_zip . ' <br> Country: ' . $customer_country .
+      ' <br> Date: ' . $created_at . '</th>
                           </tr>
                       </thead>
                   </table>

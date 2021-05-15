@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,3 +72,12 @@ Route::get('/admin/slider/deactivate/{id}', [SliderController::class, 'deactivat
 
 Route::get('/admin/orders', [OrderController::class, 'index']);
 Route::get('/admin/orders/view_pdf/{id}', [PdfController::class, 'view_pdf']);
+
+Route::group(['prefix' => 'admin'], function ()
+{
+  Auth::routes([
+    'register' => false, // Register Routes...
+    'reset'    => false, // Reset Password Routes...
+    'verify'   => false, // Email Verification Routes...
+  ]);
+});

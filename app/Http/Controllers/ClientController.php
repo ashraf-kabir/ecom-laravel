@@ -10,20 +10,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\URL;
 
 class ClientController extends Controller
 {
   public function home()
   {
     $sliders  = Slider::get();
-    $products = Product::get();
+    $products = Product::where('status', 1)->get();
     return view('client.home')->with('sliders', $sliders)->with('products', $products);
   }
 
   public function shop()
   {
-    $products   = Product::get();
+    $products   = Product::where('status', 1)->get();
     $categories = Category::get();
     return view('client.shop')->with('products', $products)->with('categories', $categories);
   }
@@ -31,7 +30,7 @@ class ClientController extends Controller
   public function shop_by_category($id)
   {
     $categories = Category::get();
-    $products   = Product::with('category')->where('category_id', $id)->get();
+    $products   = Product::where('status', 1)->with('category')->where('category_id', $id)->get();
     return view('client.shop')->with('products', $products)->with('categories', $categories);
   }
 
