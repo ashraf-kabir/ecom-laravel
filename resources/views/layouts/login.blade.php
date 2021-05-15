@@ -32,5 +32,8 @@
     <script src="{{ asset('frontend/login/vendor/daterangepicker/daterangepicker.js') }}" ></script>
     <script src="{{ asset('frontend/login/vendor/countdowntime/countdowntime.js') }}" ></script>
     <script src="{{ asset('frontend/login/js/main.js') }}" ></script>
+
+    @yield('scripts')
+
   </body>
 </html>

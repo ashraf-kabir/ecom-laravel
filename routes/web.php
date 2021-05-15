@@ -38,6 +38,10 @@ Route::post('/post_checkout', [CheckoutController::class, 'post_checkout']);
 Route::get('/login', [ClientController::class, 'login']);
 Route::get('/signup', [ClientController::class, 'signup']);
 
+Route::post('/create_account', [ClientController::class, 'create_account']);
+Route::post('/login_account', [ClientController::class, 'login_account']);
+Route::get('/logout', [ClientController::class, 'logout']);
+
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 
 Route::get('/admin/categories', [CategoryController::class, 'index']);

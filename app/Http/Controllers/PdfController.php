@@ -14,7 +14,7 @@ class PdfController extends Controller
   {
     Session::put('id', $id);
     try {
-      $pdf = \App::make('dompdf.wrapper')->setPaper('a4', 'landscape');
+      $pdf = App::make('dompdf.wrapper')->setPaper('a4', 'landscape');
       $pdf->loadHTML($this->convert_orders_data_to_html());
 
       return $pdf->stream();
@@ -30,14 +30,14 @@ class PdfController extends Controller
     $orders = Order::where('id', Session::get('id'))->get();
 
     $order_no         = '';
-    $customer_name    = '';
-    $customer_phone   = '';
-    $customer_email   = '';
-    $customer_address = '';
-    $customer_city    = '';
-    $customer_state   = '';
-    $customer_zip     = '';
-    $customer_country = '';
+    $customer_name    = 'N/A';
+    $customer_phone   = 'N/A';
+    $customer_email   = 'N/A';
+    $customer_address = 'N/A';
+    $customer_city    = 'N/A';
+    $customer_state   = 'N/A';
+    $customer_zip     = 'N/A';
+    $customer_country = 'N/A';
     $created_at       = '';
 
     foreach ($orders as $order)

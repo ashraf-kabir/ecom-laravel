@@ -32,21 +32,21 @@
             </thead>
             <tbody>
               @foreach ($orders as $order)
-                  <tr>
-                      <td>{{$order->id}}</td>
-                      <td>{{$order->name}}</td>
-                      <td>{{$order->email}}</td>
-                      <td>{{$order->phone}}</td>
-                      <td>
-                        @foreach ($order->cart->items as $item)
-                            {{$item['product_name'] . ', '}}
-                        @endforeach
-                      </td>
-                      <td>{{$order->payment_id}}</td>
-                      <td>
-                        <a class="btn btn-outline-primary" href="{{url('admin/orders/view_pdf/'.$order->id)}}" target="_blank">View</a>
-                      </td>
-                  </tr>
+                <tr>
+                    <td>{{$order->id}}</td>
+                    <td>{{$order->name}}</td>
+                    <td>{{$order->email}}</td>
+                    <td>{{$order->phone}}</td>
+                    <td>
+                      @foreach ($order->cart->items as $item)
+                        {{$item['product_name'] . ', '}}
+                      @endforeach
+                    </td>
+                    <td>{{$order->payment_id}}</td>
+                    <td>
+                      <a class="btn btn-outline-primary" href="{{url('admin/orders/view_pdf/'.$order->id)}}" target="_blank">View</a>
+                    </td>
+                </tr>
               @endforeach
             </tbody>
           </table>

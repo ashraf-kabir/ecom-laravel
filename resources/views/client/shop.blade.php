@@ -17,6 +17,8 @@
       </div>
     </div>
 
+    {{ URL::to('/') . '/cart' }}
+    {{ url()->previous() }}
     <section class="ftco-section">
       <div class="container">
         <div class="row justify-content-center">

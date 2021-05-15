@@ -226,10 +226,10 @@
             </div> --}}
 
           </div>
-        </div> <!-- .col-md-8 -->
+        </div>
       </div>
     </div>
-  </section> <!-- .section -->
+  </section>
 
 
 @endsection

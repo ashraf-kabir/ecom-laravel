@@ -14,10 +14,16 @@ class CheckoutController extends Controller
 {
   public function checkout()
   {
+    if (!Session::has('client'))
+    {
+      return redirect('/login')->with('msg', 'You must login to continue.');
+    }
+
     if (!Session::has('cart'))
     {
       return Redirect::back();
     }
+    
     return view('client.checkout');
   }
 
@@ -33,13 +39,13 @@ class CheckoutController extends Controller
     $cart     = new Cart($old_cart);
 
     $request->validate([
-      'first_name' => 'required|alpha|between:2,100',
-      'last_name'  => 'required|alpha|between:2,155',
+      'first_name' => 'required|string|between:2,100',
+      'last_name'  => 'required|string|between:2,100',
       'email'      => 'required|email|max:255',
-      'phone'      => 'required|numeric|digits_between:10,12',
-      'address_1'  => 'required|alpha_dash|between:6,150',
-      'city'       => 'required|max:25',
-      'state'      => 'required|size:2',
+      'phone'      => 'required|string|digits_between:10,12',
+      'address_1'  => 'required|string|between:6,150',
+      'city'       => 'required|string|max:25',
+      'state'      => 'required|string|size:2',
       'zip'        => 'required|numeric|digits:5',
       'country'    => 'required|size:2',
       'card_name'  => 'required|alpha|between:2,100',
