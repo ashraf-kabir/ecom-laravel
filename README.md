@@ -49,7 +49,7 @@
     php artisan serve
     ```
 
-6. Create a database on mysql using php phpmyadmin & set below variables on .env.
+6. Create a database on mysql using php phpmyadmin & set below variables on .env
     ```bash
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
