@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
@@ -65,3 +66,4 @@ Route::get('/admin/slider/activate/{id}', [SliderController::class, 'activate'])
 Route::get('/admin/slider/deactivate/{id}', [SliderController::class, 'deactivate']);
 
 Route::get('/admin/orders', [OrderController::class, 'index']);
+Route::get('/admin/orders/view_pdf/{id}', [PdfController::class, 'view_pdf']);

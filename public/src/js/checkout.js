@@ -2,7 +2,7 @@ Stripe.setPublishableKey('pk_test_51HwnxzBhwbMEU8sQgaZKwD9hVFdn1eaRF70iu4fPXJpMW
 
 var $form = $('#checkout_form');
 
-$form.submit(function(event) {
+$form.submit(function(e) {
   $('#charge_error').addClass('d-none');
   $form.find('button').prop('disabled', true);
   Stripe.card.createToken({
@@ -22,7 +22,7 @@ function stripeResponseHandler(status, response){
     $form.find('button').prop('disabled', false);
   } else {
     var token = response.id;
-    $form.append($('<input type="hidden" name="stripeToken"/>').val(token));        
+    $form.append($('<input type="hidden" name="stripe_token"/>').val(token));        
     
     // submit the form:
     $form.get(0).submit();

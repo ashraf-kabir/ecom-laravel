@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -13,7 +14,15 @@ class OrderController extends Controller
    */
   public function index()
   {
-    return view('admin.orders');
+    $orders = Order::orderBy('created_at', 'desc')->get();
+
+    $orders->transform(function ($order, $key)
+    {
+      $order->cart = unserialize($order->cart);
+      return $order;
+    });
+
+    return view('admin.orders')->with('orders', $orders);
   }
 
   /**

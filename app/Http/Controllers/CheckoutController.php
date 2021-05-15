@@ -33,15 +33,16 @@ class CheckoutController extends Controller
     $cart     = new Cart($old_cart);
 
     $request->validate([
-      'first_name' => 'required|max:100',
-      'last_name'  => 'required|max:155',
+      'first_name' => 'required|alpha|between:2,100',
+      'last_name'  => 'required|alpha|between:2,155',
       'email'      => 'required|email|max:255',
-      'phone'      => 'required|max:20',
+      'phone'      => 'required|numeric|digits_between:10,12',
+      'address_1'  => 'required|alpha_dash|between:6,150',
       'city'       => 'required|max:25',
-      'state'      => 'required|max:2',
-      'zip'        => 'required|numeric',
-      'country'    => 'required|max:2',
-      'card_name'  => 'required|max:255',
+      'state'      => 'required|size:2',
+      'zip'        => 'required|numeric|digits:5',
+      'country'    => 'required|size:2',
+      'card_name'  => 'required|alpha|between:2,100',
       'card_no'    => 'required|numeric|digits:16',
       'card_month' => 'required|numeric|digits:2',
       'card_year'  => 'required|numeric|digits:2',
@@ -56,25 +57,27 @@ class CheckoutController extends Controller
       $charge = Charge::create(array(
         "amount"      => $cart->total_price * 100,
         "currency"    => "usd",
-        "source"      => $request->input('stripeToken'), // obtained with Stripe.js
+        "source"      => $request->input('stripe_token'), // generated from checkout.js
         "description" => "Test Charge",
       ));
 
-      $order = new Order();
+      if ($charge->id)
+      {
+        $order = new Order();
 
-      $order->name       = $request->input('first_name') . ' ' . $request->input('last_name');
-      $order->email      = $request->input('email');
-      $order->phone      = $request->input('phone');
-      $order->address    = $request->input('address_1') . ' ' . $request->input('address_2');
-      $order->city       = $request->input('city');
-      $order->state      = $request->input('state');
-      $order->zip        = $request->input('zip');
-      $order->country    = $request->input('country');
-      $order->cart       = serialize($cart);
-      $order->payment_id = $charge->id;
+        $order->name       = $request->input('first_name') . ' ' . $request->input('last_name');
+        $order->email      = $request->input('email');
+        $order->phone      = $request->input('phone');
+        $order->address    = $request->input('address_1') . ' ' . $request->input('address_2');
+        $order->city       = $request->input('city');
+        $order->state      = $request->input('state');
+        $order->zip        = $request->input('zip');
+        $order->country    = $request->input('country');
+        $order->cart       = serialize($cart);
+        $order->payment_id = $charge->id;
 
-      $order->save();
-
+        $order->save();
+      }
     }
     catch (\Exception $e)
     {
@@ -83,8 +86,7 @@ class CheckoutController extends Controller
     }
 
     Session::forget('cart');
-    // Session::put('success', 'Purchase accomplished successfully !');
-    // return redirect::to('/');
+
     return redirect('cart')->with('success', 'Payment successful.');
   }
 }
