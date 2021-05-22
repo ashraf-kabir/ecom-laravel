@@ -63,4 +63,7 @@
 
 8. open the project url **http://127.0.0.1:8000**
 
-## Raise a star to support.
+### Project Preview: Home page
+![preview of ecom laravel home](https://github.com/ashraf-kabir/travel-agency/blob/master/ecom-laravel-home.png)
+
+## Raise a star to support me.
