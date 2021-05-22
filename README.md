@@ -8,7 +8,7 @@
 - **Customer->register, login, view products, add to cart, checkout**
 - **Admin->login, add products, categories. View products, categories, orders**
 - **Stripe payment gateway**
-- **Separate user panel for admin & customer. (on progress)**
+- **Separate user panel for admin & customer**
 <br>
 
 ## Languages & frameworks
