@@ -37,7 +37,8 @@
           @foreach ($products as $product)
             <div class="col-md-6 col-lg-3 ftco-animate">
               <div class="product">
-                <a href="#" class="img-prod"><img class="img-fluid" src="{{ asset($product->product_image) }}" alt="">
+                <a href="#" class="img-prod"><img class="img-fluid" src="{{ asset($product->product_image) }}" alt="{{$product->product_name}}"
+                                                onerror="if (this.src != '/uploads/no_image.jpg') this.src = '/uploads/no_image.jpg';" />
                   {{-- <span class="status">30%</span> --}}
                   <div class="overlay"></div>
                 </a>
@@ -57,7 +58,7 @@
                       <a href="/add_to_cart/{{$product->id}}" class="buy-now d-flex justify-content-center align-items-center mx-1">
                         <span><i class="ion-ios-cart"></i></span>
                       </a>
-                      <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                      <a href="#" class="heart d-flex justify-content-center align-items-center">
                         <span><i class="ion-ios-heart"></i></span>
                       </a>
                     </div>

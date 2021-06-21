@@ -53,6 +53,11 @@ class SliderController extends Controller
       'slider_image'    => 'required|mimes:jpg,png,jpeg|max:1024',
     ]);
 
+    if (!file_exists('uploads/slider_images'))
+    {
+      mkdir('uploads/slider_images', 0777, true);
+    }
+
     if ($request->hasFile('slider_image'))
     {
       $slider_image          = $request->slider_image;

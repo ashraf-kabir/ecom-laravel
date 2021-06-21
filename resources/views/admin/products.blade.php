@@ -37,7 +37,11 @@
                   <td>{{$product->product_name}}</td>
                   <td>${{$product->product_price}}</td>
                   <td>{{$product->category->category_name}}</td>
-                  <td><img src="{{ asset($product->product_image) }}" alt="{{$product->product_name}}" width="50" height="50"></td>
+                  <td>
+                    <img src="{{ asset($product->product_image) }}" alt="{{$product->product_name}}"
+                      onerror="if (this.src != '/uploads/no_image.jpg') this.src = '/uploads/no_image.jpg';" 
+                      width="50" height="50" />
+                  </td>
                   <td>
                     @if ($product->status == 1)
                       <label class="badge badge-success">Activated</label>

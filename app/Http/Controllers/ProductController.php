@@ -49,14 +49,17 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
-    // dd($request);
-
     $request->validate([
       'product_name'  => 'required|unique:products|max:255',
       'product_price' => 'required|numeric',
       'product_image' => 'nullable|mimes:jpg,png,jpeg|max:1024',
       'category_id'   => 'required|numeric',
     ]);
+
+    if (!file_exists('uploads/product_images'))
+    {
+      mkdir('uploads/product_images', 0777, true);
+    }
 
     if ($request->hasFile('product_image'))
     {
@@ -174,7 +177,7 @@ class ProductController extends Controller
         unlink($prev_img);
       }
     }
-  
+
     $product->delete();
     return redirect('admin/products')->with('status_1', 'The "' . $product->product_name . '" product deleted successfully.');
   }

@@ -33,7 +33,11 @@
                 <tr>
                     <td>{{$slider->id}}</td>
                     <td>{{$slider->description_one}}</td>
-                    <td><img src="{{ asset($slider->slider_image) }}" alt="{{$slider->slider_name}}" width="50" height="50"></td>
+                    <td>
+                      <img src="{{ asset($slider->slider_image) }}" alt="{{$slider->slider_name}}"
+                      onerror="if (this.src != '/uploads/no_image.jpg') this.src = '/uploads/no_image.jpg';"
+                      width="50" height="50" />
+                    </td>
                     <td>
                       @if ($slider->status == 1)
                         <label class="badge badge-success">Activated</label>
