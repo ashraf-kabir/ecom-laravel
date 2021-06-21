@@ -37,7 +37,7 @@
                 {{Form::label('', 'Slider Image', ['for' => 'slider_image'])}}
                 
                 <div class="row ml-2 mb-1">
-                  <img class="float-right" src="/storage/{{$slider->slider_image}}" alt="{{$slider->slider_name}}" width="50" height="50">
+                  <img class="float-right" src="{{ asset($slider->slider_image) }}" alt="{{$slider->slider_name}}" width="50" height="50">
                 </div>
                 
                 {{Form::file('slider_image', ['class' => 'form-control', 'id' => 'slider_image'])}}

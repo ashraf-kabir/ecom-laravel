@@ -42,7 +42,7 @@
                 {{Form::label('', 'Product Image', ['for' => 'product_image'])}}
 
                 <div class="row ml-2 mb-1">
-                  <img class="float-right" src="/storage/{{$product->product_image}}" alt="{{$product->product_name}}" width="50" height="50">
+                  <img class="float-right" src="{{ asset($product->product_image) }}" alt="{{$product->product_name}}" width="50" height="50">
                 </div>
 
                 {{Form::file('product_image', ['class' => 'form-control', 'id' => 'product_image'])}}

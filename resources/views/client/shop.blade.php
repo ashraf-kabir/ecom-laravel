@@ -37,7 +37,7 @@
           @foreach ($products as $product)
             <div class="col-md-6 col-lg-3 ftco-animate">
               <div class="product">
-                <a href="#" class="img-prod"><img class="img-fluid" src="/storage/{{$product->product_image}}" alt="Colorlib Template">
+                <a href="#" class="img-prod"><img class="img-fluid" src="{{ asset($product->product_image) }}" alt="">
                   {{-- <span class="status">30%</span> --}}
                   <div class="overlay"></div>
                 </a>

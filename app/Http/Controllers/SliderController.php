@@ -55,23 +55,22 @@ class SliderController extends Controller
 
     if ($request->hasFile('slider_image'))
     {
-      $file_name_with_ext  = $request->file('slider_image')->getClientOriginalName();
-      $file_name           = pathinfo($file_name_with_ext, PATHINFO_FILENAME);
-      $extension           = $request->file('slider_image')->getClientOriginalExtension();
-      $file_name_formatted = $file_name . '_' . time() . '.' . $extension;
-      $image_path          = $request->file('slider_image')->storeAs('public/uploads/slider_images', $file_name_formatted);
-      $image_path_real     = 'uploads/slider_images/' . $file_name_formatted;
+      $slider_image          = $request->slider_image;
+      $slider_image_new_name = time() . '_' . $slider_image->getClientOriginalName();
+      $slider_image->move('uploads/slider_images', $slider_image_new_name);
+
+      $image_path = 'uploads/slider_images/' . $slider_image_new_name;
     }
     else
     {
-      $image_path_real = 'uploads/slider_images/no_image.jpg';
+      $image_path = 'uploads/slider_images/no_image.jpg';
     }
 
     $slider = new Slider();
 
     $slider->description_one = $request->input('description_one');
     $slider->description_two = $request->input('description_two');
-    $slider->slider_image    = $image_path_real;
+    $slider->slider_image    = $image_path;
     $slider->status          = 1;
 
     $slider->save();
@@ -122,19 +121,23 @@ class SliderController extends Controller
     $slider->description_one = $request->input('description_one');
     $slider->description_two = $request->input('description_two');
 
+    $prev_img = $slider->slider_image;
+
     if ($request->hasFile('slider_image'))
     {
-      $file_name_with_ext  = $request->file('slider_image')->getClientOriginalName();
-      $file_name           = pathinfo($file_name_with_ext, PATHINFO_FILENAME);
-      $extension           = $request->file('slider_image')->getClientOriginalExtension();
-      $file_name_formatted = $file_name . '_' . time() . '.' . $extension;
-      $image_path          = $request->file('slider_image')->storeAs('public/uploads/slider_images', $file_name_formatted);
+      $slider_image          = $request->slider_image;
+      $slider_image_new_name = time() . '_' . $slider_image->getClientOriginalName();
+      $slider_image->move('uploads/slider_images', $slider_image_new_name);
+      $image_path           = 'uploads/slider_images/' . $slider_image_new_name;
+      $slider->slider_image = $image_path;
 
-      if ($slider->slider_image != 'no_image.jpg')
+      if ($prev_img != 'uploads/no_image.jpg')
       {
-        Storage::delete('public/' . $slider->slider_image);
+        if (file_exists($prev_img))
+        {
+          unlink($prev_img);
+        }
       }
-      $slider->slider_image = 'uploads/slider_images/' . $file_name_formatted;
     }
 
     $slider->update();

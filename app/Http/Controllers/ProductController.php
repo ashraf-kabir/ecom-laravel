@@ -49,6 +49,8 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
+    // dd($request);
+
     $request->validate([
       'product_name'  => 'required|unique:products|max:255',
       'product_price' => 'required|numeric',
@@ -58,16 +60,15 @@ class ProductController extends Controller
 
     if ($request->hasFile('product_image'))
     {
-      $file_name_with_ext  = $request->file('product_image')->getClientOriginalName();
-      $file_name           = pathinfo($file_name_with_ext, PATHINFO_FILENAME);
-      $extension           = $request->file('product_image')->getClientOriginalExtension();
-      $file_name_formatted = $file_name . '_' . time() . '.' . $extension;
-      $image_path          = $request->file('product_image')->storeAs('public/uploads/product_images', $file_name_formatted);
-      $image_path_real     = 'uploads/product_images/' . $file_name_formatted;
+      $product_image          = $request->product_image;
+      $product_image_new_name = time() . '_' . $product_image->getClientOriginalName();
+      $product_image->move('uploads/product_images', $product_image_new_name);
+
+      $image_path = 'uploads/product_images/' . $product_image_new_name;
     }
     else
     {
-      $image_path_real = 'uploads/product_images/no_image.jpg';
+      $image_path = 'uploads/product_images/no_image.jpg';
     }
 
     $product = new Product();
@@ -75,7 +76,7 @@ class ProductController extends Controller
     $product->product_name  = $request->input('product_name');
     $product->product_price = $request->input('product_price');
     $product->category_id   = $request->input('category_id');
-    $product->product_image = $image_path_real;
+    $product->product_image = $image_path;
     $product->status        = 1;
 
     $product->save();
@@ -131,19 +132,23 @@ class ProductController extends Controller
     $product->product_price = $request->input('product_price');
     $product->category_id   = $request->input('category_id');
 
+    $prev_img = $product->product_image;
+
     if ($request->hasFile('product_image'))
     {
-      $file_name_with_ext  = $request->file('product_image')->getClientOriginalName();
-      $file_name           = pathinfo($file_name_with_ext, PATHINFO_FILENAME);
-      $extension           = $request->file('product_image')->getClientOriginalExtension();
-      $file_name_formatted = $file_name . '_' . time() . '.' . $extension;
-      $image_path          = $request->file('product_image')->storeAs('public/uploads/product_images', $file_name_formatted);
+      $product_image          = $request->product_image;
+      $product_image_new_name = time() . '_' . $product_image->getClientOriginalName();
+      $product_image->move('uploads/product_images', $product_image_new_name);
+      $image_path             = 'uploads/product_images/' . $product_image_new_name;
+      $product->product_image = $image_path;
 
-      if ($product->product_image != 'no_image.jpg')
+      if ($prev_img != 'uploads/no_image.jpg')
       {
-        Storage::delete('public/' . $product->product_image);
+        if (file_exists($prev_img))
+        {
+          unlink($prev_img);
+        }
       }
-      $product->product_image = 'uploads/product_images/' . $file_name_formatted;
     }
 
     $product->update();
