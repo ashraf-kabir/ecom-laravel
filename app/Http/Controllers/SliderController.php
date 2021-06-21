@@ -153,10 +153,17 @@ class SliderController extends Controller
   public function destroy($id)
   {
     $slider = Slider::find($id);
-    if ($slider->slider_image != 'no_image.jpg')
+
+    $prev_img = $slider->slider_image;
+
+    if ($prev_img != 'uploads/no_image.jpg')
     {
-      Storage::delete('public/' . $slider->slider_image);
+      if (file_exists($prev_img))
+      {
+        unlink($prev_img);
+      }
     }
+
     $slider->delete();
     return redirect('admin/sliders')->with('status_1', 'The slider deleted successfully.');
   }

@@ -68,7 +68,7 @@ class ProductController extends Controller
     }
     else
     {
-      $image_path = 'uploads/product_images/no_image.jpg';
+      $image_path = 'uploads/no_image.jpg';
     }
 
     $product = new Product();
@@ -164,10 +164,17 @@ class ProductController extends Controller
   public function destroy($id)
   {
     $product = Product::find($id);
-    if ($product->product_image != 'no_image.jpg')
+
+    $prev_img = $product->product_image;
+
+    if ($prev_img != 'uploads/no_image.jpg')
     {
-      Storage::delete('public/' . $product->product_image);
+      if (file_exists($prev_img))
+      {
+        unlink($prev_img);
+      }
     }
+  
     $product->delete();
     return redirect('admin/products')->with('status_1', 'The "' . $product->product_name . '" product deleted successfully.');
   }
