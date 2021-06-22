@@ -60,8 +60,12 @@
     ```
 
 7. If you don't have any mysql login password, keep the DB_PASSWORD blank.
+8. run the below command to migrate & seed. Check the databaseseeder for more clarification.
+    ```bash
+    php artisan migrate:refresh --seed
+    ```
 
-8. open the project url **http://127.0.0.1:8000**
+9. open the project url **http://127.0.0.1:8000**
 
 ### Project Preview: Home page
 ![preview of ecom laravel home](https://github.com/ashraf-kabir/ecom-laravel/blob/master/ecom-laravel-home.png)
