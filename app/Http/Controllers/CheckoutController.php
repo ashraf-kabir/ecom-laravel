@@ -23,10 +23,13 @@ class CheckoutController extends Controller
     {
       return Redirect::back();
     }
-    
+
     return view('client.checkout');
   }
 
+  /**
+   * @param Request $request
+   */
   public function post_checkout(Request $request)
   {
     if (!Session::has('cart'))
@@ -60,12 +63,12 @@ class CheckoutController extends Controller
     Stripe::setApiKey($stripe_secret_key);
 
     try {
-      $charge = Charge::create(array(
+      $charge = Charge::create([
         "amount"      => $cart->total_price * 100,
         "currency"    => "usd",
         "source"      => $request->input('stripe_token'), // generated from checkout.js
         "description" => "Test Charge",
-      ));
+      ]);
 
       if ($charge->id)
       {

@@ -20,6 +20,10 @@ class PdfController extends Controller
     $this->middleware('auth');
   }
 
+  /**
+   * @param $id
+   * @return mixed
+   */
   public function view_pdf($id)
   {
     Session::put('id', $id);
@@ -35,6 +39,9 @@ class PdfController extends Controller
     }
   }
 
+  /**
+   * @return mixed
+   */
   public function convert_orders_data_to_html()
   {
     $orders = Order::where('id', Session::get('id'))->get();
@@ -72,61 +79,58 @@ class PdfController extends Controller
     });
 
     $output = '<link rel="stylesheet" href="frontend/css/style.css">
-                  <h4 class="text-center">Order # ' . $order_no . '</h4>
-                  <table class="table">
-                      <thead class="thead">
-                          <tr class="text-left">
-                              <th>Client Name: ' . $customer_name . '<br> Email: ' . $customer_email .
+                <h4 class="text-center">Order # ' . $order_no . '</h4>
+                <table class="table">
+                  <thead class="thead">
+                    <tr class="text-left">
+                      <th>Client Name: ' . $customer_name . '<br> Email: ' . $customer_email .
       ' <br> Phone: ' . $customer_phone . '<br> Address: ' . $customer_address .
       ' <br> City: ' . $customer_city . ' <br> State: ' . $customer_state .
       ' <br> Zip: ' . $customer_zip . ' <br> Country: ' . $customer_country .
       ' <br> Date: ' . $created_at . '</th>
-                          </tr>
-                      </thead>
-                  </table>
-                  <table class="table">
-                      <thead class="thead-primary">
-                          <tr class="text-center">
-                              <th>Image</th>
-                              <th>Product Name</th>
-                              <th>Price</th>
-                              <th>Quantity</th>
-                              <th>Total</th>
-                          </tr>
-                      </thead>
-                      <tbody>';
+                    </tr>
+                  </thead>
+                </table>
+                <table class="table">
+                    <thead class="thead-primary">
+                      <tr class="text-center">
+                        <th>Image</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>';
 
     foreach ($orders as $order)
     {
       foreach ($order->cart->items as $item)
       {
-
         $output .= '<tr class="text-center">
-                        <td class="image-prod"><img src="./storage/' . $item['product_image'] . '" alt="" style = "height: 80px; width: 80px;"></td>
-                        <td class="product-name">
-                            <h3>' . $item['product_name'] . '</h3>
-                        </td>
-                        <td class="price">$ ' . $item['product_price'] . '</td>
-                        <td class="qty">' . $item['qty'] . '</td>
-                        <td class="total">$ ' . $item['product_price'] * $item['qty'] . '</td>
+                      <td class="image-prod"><img src="' . $item['product_image'] . '" alt="" style = "height: 80px; width: 80px;"></td>
+                      <td class="product-name">
+                        <h3>' . $item['product_name'] . '</h3>
+                      </td>
+                      <td class="price">$ ' . $item['product_price'] . '</td>
+                      <td class="qty">' . $item['qty'] . '</td>
+                      <td class="total">$ ' . $item['product_price'] * $item['qty'] . '</td>
                     </tr>
-                </tbody>';
-
+                  </tbody>';
       }
 
       $total_price = $order->cart->total_price;
-
     }
 
     $output .= '</table>';
 
     $output .= '<table class="table">
-                    <thead class="thead">
-                        <tr class="text-center">
-                            <th>Total</th>
-                            <th>$ ' . $total_price . '</th>
-                        </tr>
-                    </thead>
+                  <thead class="thead">
+                    <tr class="text-center">
+                      <th>Total</th>
+                      <th>$ ' . $total_price . '</th>
+                    </tr>
+                  </thead>
                 </table>';
 
     return $output;

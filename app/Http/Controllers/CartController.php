@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
+  /**
+   * @param $id
+   */
   public function add_to_cart($id)
   {
     $product = Product::find($id);
@@ -36,6 +39,9 @@ class CartController extends Controller
     return view('client.cart', ['products' => $cart->items]);
   }
 
+  /**
+   * @param Request $request
+   */
   public function update_qty(Request $request)
   {
     // print('the product id is ' . $request->id . ' And the product qty is ' . $request->quantity);
@@ -48,6 +54,9 @@ class CartController extends Controller
     return Redirect::back();
   }
 
+  /**
+   * @param $product_id
+   */
   public function remove_item($product_id)
   {
     $old_cart = Session::has('cart') ? Session::get('cart') : null;

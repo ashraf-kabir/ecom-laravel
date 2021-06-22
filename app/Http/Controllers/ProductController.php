@@ -53,7 +53,7 @@ class ProductController extends Controller
       'product_name'  => 'required|unique:products|max:255',
       'product_price' => 'required|numeric',
       'product_image' => 'nullable|mimes:jpg,png,jpeg|max:1024',
-      'category_id'   => 'required|numeric',
+      'category_id'   => 'required|numeric'
     ]);
 
     if (!file_exists('uploads/product_images'))
@@ -126,7 +126,7 @@ class ProductController extends Controller
       'product_name'  => 'required|max:255',
       'product_price' => 'required|numeric',
       'product_image' => 'nullable|mimes:jpg,png,jpeg|max:1024',
-      'category_id'   => 'required|numeric',
+      'category_id'   => 'required|numeric'
     ]);
 
     $product = Product::find($id);
@@ -182,6 +182,9 @@ class ProductController extends Controller
     return redirect('admin/products')->with('status_1', 'The "' . $product->product_name . '" product deleted successfully.');
   }
 
+  /**
+   * @param $id
+   */
   public function activate($id)
   {
     $product         = Product::find($id);
@@ -190,6 +193,9 @@ class ProductController extends Controller
     return redirect('admin/products')->with('status_1', 'The "' . $product->product_name . '" product activated successfully.');
   }
 
+  /**
+   * @param $id
+   */
   public function deactivate($id)
   {
     $product         = Product::find($id);

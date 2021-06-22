@@ -50,7 +50,7 @@ class SliderController extends Controller
     $request->validate([
       'description_one' => 'required|max:30',
       'description_two' => 'required|max:60',
-      'slider_image'    => 'required|mimes:jpg,png,jpeg|max:1024',
+      'slider_image'    => 'required|mimes:jpg,png,jpeg|max:1024'
     ]);
 
     if (!file_exists('uploads/slider_images'))
@@ -118,7 +118,7 @@ class SliderController extends Controller
     $request->validate([
       'description_one' => 'required|max:30',
       'description_two' => 'required|max:60',
-      'slider_image'    => 'nullable|mimes:jpg,png,jpeg|max:1024',
+      'slider_image'    => 'nullable|mimes:jpg,png,jpeg|max:1024'
     ]);
 
     $slider = Slider::find($id);
@@ -173,6 +173,9 @@ class SliderController extends Controller
     return redirect('admin/sliders')->with('status_1', 'The slider deleted successfully.');
   }
 
+  /**
+   * @param $id
+   */
   public function activate($id)
   {
     $slider         = Slider::find($id);
@@ -181,6 +184,9 @@ class SliderController extends Controller
     return redirect('admin/sliders')->with('status_1', 'The slider activated successfully.');
   }
 
+  /**
+   * @param $id
+   */
   public function deactivate($id)
   {
     $slider         = Slider::find($id);

@@ -27,6 +27,9 @@ class ClientController extends Controller
     return view('client.shop')->with('products', $products)->with('categories', $categories);
   }
 
+  /**
+   * @param $id
+   */
   public function shop_by_category($id)
   {
     $categories = Category::get();
@@ -44,6 +47,9 @@ class ClientController extends Controller
     return view('client.signup');
   }
 
+  /**
+   * @param Request $request
+   */
   public function create_account(Request $request)
   {
     $request->validate([
@@ -66,6 +72,9 @@ class ClientController extends Controller
     return back()->with('success', 'Your account created successfully.');
   }
 
+  /**
+   * @param Request $request
+   */
   public function login_account(Request $request)
   {
     $request->validate([
