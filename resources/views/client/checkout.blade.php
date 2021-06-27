@@ -241,7 +241,7 @@
 <script>
   $(document).ready(function(){
 
-  var quantitiy=0;
+    var quantitiy = 0;
     $('.quantity-right-plus').click(function(e){
       // Stop acting like a button
       e.preventDefault();
@@ -264,7 +264,7 @@
 
       // Increment
       if(quantity>0){
-      $('#quantity').val(quantity - 1);
+        $('#quantity').val(quantity - 1);
       }
     });
   });

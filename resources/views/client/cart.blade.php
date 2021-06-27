@@ -40,7 +40,7 @@
                       <tr class="text-center">
                         <td class="product-remove"><a href="/cart/remove_item/{{$product['product_id']}}"><span class="ion-ios-close"></span></a></td>
 
-                        <td class="image-prod"><div class="img" style="background-image:url(/storage/{{$product['product_image']}});"></div></td>
+                        <td class="image-prod"><div class="img" style="background-image:url({{$product['product_image']}});"></div></td>
 
                         <td class="product-name">
                           <h3>{{$product['product_name']}}</h3>
@@ -157,7 +157,7 @@
 @section('scripts')
 <script>
   $(document).ready(function() {
-  var quantitiy = 0;
+    var quantitiy = 0;
     $('.quantity-right-plus').click(function(e) {
       // Stop acting like a button
       e.preventDefault();
