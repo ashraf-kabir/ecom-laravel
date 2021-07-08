@@ -4,22 +4,12 @@ namespace App;
 
 class Cart
 {
-  /**
-   * @var mixed
-   */
   public $items = null;
-  /**
-   * @var int
-   */
+
   public $total_qty = 0;
-  /**
-   * @var int
-   */
+
   public $total_price = 0;
 
-  /**
-   * @param $old_cart
-   */
   public function __construct($old_cart)
   {
     if ($old_cart)
@@ -30,10 +20,6 @@ class Cart
     }
   }
 
-  /**
-   * @param $item
-   * @param $product_id
-   */
   public function add($item, $product_id)
   {
     $store_item = [
@@ -64,10 +50,6 @@ class Cart
     $this->items[$product_id] = $store_item;
   }
 
-  /**
-   * @param $id
-   * @param $qty
-   */
   public function update_qty($id, $qty)
   {
     $this->total_qty -= $this->items[$id]['qty'];
@@ -77,9 +59,6 @@ class Cart
     $this->total_price += $this->items[$id]['product_price'] * $qty;
   }
 
-  /**
-   * @param $id
-   */
   public function remove_item($id)
   {
     $this->total_qty -= $this->items[$id]['qty'];

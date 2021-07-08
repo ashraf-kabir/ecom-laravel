@@ -1,4 +1,4 @@
-Stripe.setPublishableKey('pk_test_51Ils9uGIRJCEJdml7aAgy5VtHpNz7FZ9oKsNOMnazgbBLtMqvigUCKr5x3j7Shb3bcicR2Rg9PyFV6uv2kjxOoZB00fY67GM8I');
+Stripe.setPublishableKey('pk_test_51J9okdBheW37mvyknf4iPsrw0tf6WdF6T5bMKOrFpCmu2Iy0qNBDCV4JAO3m2BLQMT8U6EGXyFiiY5QYyMsJapEw00MidARAU4');
 
 var $form = $('#checkout_form');
 
