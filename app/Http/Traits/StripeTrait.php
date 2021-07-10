@@ -14,7 +14,8 @@ trait StripeTrait
 
     if (!empty($total_price) && !empty($stripe_card_token))
     {
-      try {
+      try
+      {
         $charge = $stripe->charges->create([
           'amount'      => $total_price * 100,
           'currency'    => 'usd',

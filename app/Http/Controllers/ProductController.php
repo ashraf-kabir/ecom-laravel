@@ -50,10 +50,16 @@ class ProductController extends Controller
   public function store(Request $request)
   {
     $request->validate([
-      'product_name'  => 'required|unique:products|max:255',
-      'product_price' => 'required|numeric',
-      'product_image' => 'nullable|mimes:jpg,png,jpeg|max:1024',
-      'category_id'   => 'required|numeric'
+      'product_name'        => 'required|max:255',
+      'category_id'         => 'required|numeric',
+      'product_price'       => 'required|numeric',
+      'product_image'       => 'nullable|mimes:jpg,png,jpeg|max:1024',
+      'product_length'      => 'required|numeric',
+      'product_width'       => 'required|numeric',
+      'product_height'      => 'required|numeric',
+      'product_weight'      => 'required|numeric',
+      'product_quantity'    => 'required|numeric',
+      'product_description' => 'required'
     ]);
 
     if (!file_exists('uploads/product_images'))
@@ -76,11 +82,17 @@ class ProductController extends Controller
 
     $product = new Product();
 
-    $product->product_name  = $request->input('product_name');
-    $product->product_price = $request->input('product_price');
-    $product->category_id   = $request->input('category_id');
-    $product->product_image = $image_path;
-    $product->status        = 1;
+    $product->product_name        = $request->input('product_name');
+    $product->category_id         = $request->input('category_id');
+    $product->product_price       = $request->input('product_price');
+    $product->product_length      = $request->input('product_length');
+    $product->product_width       = $request->input('product_width');
+    $product->product_height      = $request->input('product_height');
+    $product->product_weight      = $request->input('product_weight');
+    $product->product_quantity    = $request->input('product_quantity');
+    $product->product_description = $request->input('product_description');
+    $product->product_image       = $image_path;
+    $product->status              = 1;
 
     $product->save();
 
@@ -95,7 +107,9 @@ class ProductController extends Controller
    */
   public function show($id)
   {
-    //
+    $product = Product::with('category')->find($id);
+
+    return view('admin.viewproduct')->with('product', $product);
   }
 
   /**
@@ -123,17 +137,29 @@ class ProductController extends Controller
   public function update(Request $request, $id)
   {
     $request->validate([
-      'product_name'  => 'required|max:255',
-      'product_price' => 'required|numeric',
-      'product_image' => 'nullable|mimes:jpg,png,jpeg|max:1024',
-      'category_id'   => 'required|numeric'
+      'product_name'        => 'required|max:255',
+      'category_id'         => 'required|numeric',
+      'product_price'       => 'required|numeric',
+      'product_image'       => 'nullable|mimes:jpg,png,jpeg|max:1024',
+      'product_length'      => 'required|numeric',
+      'product_width'       => 'required|numeric',
+      'product_height'      => 'required|numeric',
+      'product_weight'      => 'required|numeric',
+      'product_quantity'    => 'required|numeric',
+      'product_description' => 'required'
     ]);
 
     $product = Product::find($id);
 
-    $product->product_name  = $request->input('product_name');
-    $product->product_price = $request->input('product_price');
-    $product->category_id   = $request->input('category_id');
+    $product->product_name        = $request->input('product_name');
+    $product->category_id         = $request->input('category_id');
+    $product->product_price       = $request->input('product_price');
+    $product->product_length      = $request->input('product_length');
+    $product->product_width       = $request->input('product_width');
+    $product->product_height      = $request->input('product_height');
+    $product->product_weight      = $request->input('product_weight');
+    $product->product_quantity    = $request->input('product_quantity');
+    $product->product_description = $request->input('product_description');
 
     $prev_img = $product->product_image;
 

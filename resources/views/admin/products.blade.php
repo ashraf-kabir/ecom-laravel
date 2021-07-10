@@ -35,7 +35,7 @@
                 <tr>
                   <td>{{$product->id}}</td>
                   <td>{{$product->product_name}}</td>
-                  <td>${{$product->product_price}}</td>
+                  <td>${{ number_format($product->product_price, 2) }}</td>
                   <td>{{$product->category->category_name}}</td>
                   <td>
                     <img src="{{ asset($product->product_image) }}" alt="{{$product->product_name}}"
@@ -50,7 +50,8 @@
                     @endif
                   </td>
                   <td>
-                    <button class="btn btn-outline-primary" onclick="window.location = '{{url('admin/product/edit/'.$product->id)}}'">Edit</button>
+                    <a class="btn btn-outline-primary" href="{{url('admin/product/edit/'.$product->id)}}" target="_blank">Edit</a>
+                    <a class="btn btn-outline-primary" href="{{url('admin/product/show/'.$product->id)}}" target="_blank">View</a>
                     <a class="btn btn-outline-danger" href="/admin/product/delete/{{$product->id}}" id="delete">Delete</a>
                     @if ($product->status == 1)
                       <button class="btn btn-outline-warning" onclick="window.location = '{{url('admin/product/deactivate/'.$product->id)}}'">Deactivate</button>                    

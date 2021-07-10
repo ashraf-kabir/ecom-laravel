@@ -29,11 +29,6 @@
               </div>
 
               <div class="form-group">
-                {{Form::label('', 'Product Price', ['for' => 'product_price'])}}
-                {{Form::text('product_price', '', ['class' => 'form-control', 'id' => 'product_price'])}}
-              </div>
-
-              <div class="form-group">
                 {{Form::label('', 'Product Category', ['for' => 'product_category'])}}
                 {{Form::select('category_id', $categories, null, ['placeholder' => 'Select Category', 'class' => 'form-control', 'id' => 'product_category'])}}
               </div>
@@ -41,6 +36,41 @@
               <div class="form-group">
                 {{Form::label('', 'Product Image', ['for' => 'product_image'])}}
                 {{Form::file('product_image', ['class' => 'form-control', 'id' => 'product_image'])}}
+              </div>
+
+              <div class="form-group">
+                {{Form::label('', 'Product Price', ['for' => 'product_price'])}}
+                {{Form::text('product_price', '', ['class' => 'form-control', 'id' => 'product_price'])}}
+              </div>
+
+              <div class="form-group">
+                {{Form::label('', 'Product Length (inches)', ['for' => 'product_length'])}}
+                {{Form::text('product_length', '', ['class' => 'form-control', 'id' => 'product_length'])}}
+              </div>
+
+              <div class="form-group">
+                {{Form::label('', 'Product Width (inches)', ['for' => 'product_width'])}}
+                {{Form::text('product_width', '', ['class' => 'form-control', 'id' => 'product_width'])}}
+              </div>
+
+              <div class="form-group">
+                {{Form::label('', 'Product Height (inches)', ['for' => 'product_height'])}}
+                {{Form::text('product_height', '', ['class' => 'form-control', 'id' => 'product_height'])}}
+              </div>
+
+              <div class="form-group">
+                {{Form::label('', 'Product Weight (pounds)', ['for' => 'product_weight'])}}
+                {{Form::text('product_weight', '', ['class' => 'form-control', 'id' => 'product_weight'])}}
+              </div>
+
+              <div class="form-group">
+                {{Form::label('', 'Product Quantity', ['for' => 'product_quantity'])}}
+                {{Form::text('product_quantity', '', ['class' => 'form-control', 'id' => 'product_quantity'])}}
+              </div>
+
+              <div class="form-group">
+                {{Form::label('', 'Product description', ['for' => 'product_description'])}}
+                {{Form::textarea('product_description', '', ['class' => 'form-control', 'id' => 'product_description'])}}
               </div>
 
               {{-- <div class="form-group">

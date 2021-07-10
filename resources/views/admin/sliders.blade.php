@@ -46,7 +46,7 @@
                       @endif
                     </td>
                     <td>
-                      <button class="btn btn-outline-primary" onclick="window.location = '{{url('admin/slider/edit/'.$slider->id)}}'">Edit</button>
+                      <a class="btn btn-outline-primary" href="{{url('admin/slider/edit/'.$slider->id)}}" target="_blank">Edit</a>
                       <a class="btn btn-outline-danger" href="/admin/slider/delete/{{$slider->id}}" id="delete">Delete</a>
                       @if ($slider->status == 1)
                         <button class="btn btn-outline-warning" onclick="window.location = '{{url('admin/slider/deactivate/'.$slider->id)}}'">Deactivate</button>                    
