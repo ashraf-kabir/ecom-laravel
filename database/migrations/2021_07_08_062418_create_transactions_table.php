@@ -23,6 +23,7 @@ class CreateTransactionsTable extends Migration
       $table->string('payment_id');
       $table->integer('payment_type');
       $table->integer('user_id');
+      $table->integer('order_id');
       $table->timestamps();
     });
   }

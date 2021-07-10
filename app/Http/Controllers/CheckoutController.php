@@ -104,6 +104,7 @@ class CheckoutController extends Controller
         $transaction->payment_id   = $response['charge']->id;
         $transaction->payment_type = 1; // 1 -> card, 2 -> cash
         $transaction->user_id      = $user->id;
+        $transaction->order_id     = $order->id;
 
         $check_transaction_save = $transaction->save();
 
