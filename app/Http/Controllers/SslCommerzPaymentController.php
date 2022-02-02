@@ -15,18 +15,18 @@ class SslCommerzPaymentController extends Controller
 
     public function exampleEasyCheckout()
     {
-        return view('exampleEasycheckout');
+        return view('checkout.easyCheckout');
     }
 
     public function exampleHostedCheckout()
     {
-        return view('exampleHosted');
+        return view('checkout.hostedCheckout');
     }
 
     public function index(Request $request)
     {
-        # Here you have to receive all the order data to initate the payment.
-        # Let's say, your oder transaction informations are saving in a table called "orders"
+        # Here you have to receive all the order data to initiate the payment.
+        # Let's say, your oder transaction information are saving in a table called "orders"
         # In "orders" table, order unique identity is "transaction_id". "status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
 
         $post_data                 = [];
@@ -43,7 +43,7 @@ class SslCommerzPaymentController extends Controller
         $post_data['cus_state']    = "";
         $post_data['cus_postcode'] = "";
         $post_data['cus_country']  = "Bangladesh";
-        $post_data['cus_phone']    = '8801XXXXXXXXX';
+        $post_data['cus_phone']    = '8801680246806';
         $post_data['cus_fax']      = "";
 
         # SHIPMENT INFORMATION
@@ -82,7 +82,7 @@ class SslCommerzPaymentController extends Controller
             ]);
 
         $sslc = new SslCommerzNotification();
-        # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
+        # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payment gateway here )
         $payment_options = $sslc->makePayment($post_data, 'hosted');
 
         if (!is_array($payment_options))
@@ -96,7 +96,7 @@ class SslCommerzPaymentController extends Controller
     public function payViaAjax(Request $request)
     {
 
-        # Here you have to receive all the order data to initate the payment.
+        # Here you have to receive all the order data to initiate the payment.
         # Lets your oder transaction information are saving in a table called "orders"
         # In orders table order uniq identity is "transaction_id","status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
 
