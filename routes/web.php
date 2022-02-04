@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\SslCommerzPaymentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

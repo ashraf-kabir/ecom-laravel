@@ -32,9 +32,6 @@
 <div class="container">
     <div class="py-5 text-center">
         <h2>EasyCheckout (Popup) - SSLCommerz</h2>
-
-        <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. We have provided this
-            sample form for understanding EasyCheckout (Popup) Payment integration with SSLCommerz.</p>
     </div>
 
     <div class="row">
@@ -77,8 +74,8 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="firstName">Full name</label>
-                        <input type="text" name="customer_name" class="form-control" id="customer_name" placeholder=""
-                               value="John Doe" required>
+                        <input type="text" name="customer_name" class="form-control" id="customer_name" placeholder="Your Name"
+                              value="" required>
                         <div class="invalid-feedback">
                             Valid customer name is required.
                         </div>
@@ -91,8 +88,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">+88</span>
                         </div>
-                        <input type="text" name="customer_mobile" class="form-control" id="mobile" placeholder="Mobile"
-                               value="01711xxxxxx" required>
+                        <input type="text" name="customer_mobile" class="form-control" id="mobile" placeholder="01711xxxxxx"
+                              value="" required>
                         <div class="invalid-feedback" style="width: 100%;">
                             Your Mobile number is required.
                         </div>
@@ -102,7 +99,7 @@
                 <div class="mb-3">
                     <label for="email">Email <span class="text-muted">(Optional)</span></label>
                     <input type="email" name="customer_email" class="form-control" id="email"
-                           placeholder="you@example.com" value="you@example.com" required>
+                          placeholder="you@example.com" value="" required>
                     <div class="invalid-feedback">
                         Please enter a valid email address for shipping updates.
                     </div>
@@ -110,8 +107,8 @@
 
                 <div class="mb-3">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="1234 Main St"
-                           value="93 B, New Eskaton Road" required>
+                    <input type="text" class="form-control" id="address" placeholder="Your address"
+                          value="" required>
                     <div class="invalid-feedback">
                         Please enter your shipping address.
                     </div>
@@ -145,7 +142,7 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="zip">Zip</label>
-                        <input type="text" class="form-control" id="zip" placeholder="" required>
+                        <input type="text" class="form-control" id="zip" placeholder="1207" required>
                         <div class="invalid-feedback">
                             Zip code required.
                         </div>
@@ -174,7 +171,7 @@
     </div>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2019 Company Name</p>
+        <p class="mb-1">&copy; 2022 Ashraf Kabir</p>
         <ul class="list-inline">
             <li class="list-inline-item"><a href="#">Privacy</a></li>
             <li class="list-inline-item"><a href="#">Terms</a></li>
